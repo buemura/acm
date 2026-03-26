@@ -90,9 +90,6 @@ var cleanCmd = &cobra.Command{
 }
 
 func init() {
-	cleanCmd.Flags().StringP("provider", "p", "claude", "Cache provider name")
-	cleanCmd.Flags().StringP("type", "t", "", "Filter by file extension (e.g. json, log)")
-	cleanCmd.Flags().StringP("age", "a", "", "Filter by minimum file age (e.g. 20m, 24h, 7d)")
 	cleanCmd.Flags().BoolP("force", "f", false, "Skip confirmation prompt")
 	rootCmd.AddCommand(cleanCmd)
 }

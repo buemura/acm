@@ -57,8 +57,5 @@ var listCmd = &cobra.Command{
 }
 
 func init() {
-	listCmd.Flags().StringP("provider", "p", "claude", "Cache provider name")
-	listCmd.Flags().StringP("type", "t", "", "Filter by file extension (e.g. json, log)")
-	listCmd.Flags().StringP("age", "a", "", "Filter by minimum file age (e.g. 20m, 24h, 7d)")
 	rootCmd.AddCommand(listCmd)
 }

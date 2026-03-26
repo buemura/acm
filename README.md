@@ -76,13 +76,16 @@ acm clean -f                      # Skip confirmation prompt
 ## Project Structure
 
 ```
-├── cmd/           # CLI commands (root, list, clean)
-├── provider/      # Provider registry and implementations (Claude, Codex)
-├── scanner/       # File discovery, filtering, and deduplication
-├── ui/            # Interactive menu and output formatting
-├── main.go        # Entry point
-├── Makefile       # Build automation
-└── go.mod         # Go module definition
+├── cmd/
+│   └── acm/
+│       └── main.go              # Application entry point
+├── internal/
+│   ├── cli/                     # CLI commands (root, list, clean)
+│   ├── provider/                # Provider registry and implementations (Claude, Codex)
+│   ├── scanner/                 # File discovery, filtering, and deduplication
+│   └── ui/                      # Interactive menu and output formatting
+├── Makefile                     # Build automation
+└── go.mod                       # Go module definition
 ```
 
 ## Development

@@ -6,8 +6,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/buemura/agnt-cc/provider"
-	"github.com/buemura/agnt-cc/scanner"
+	"github.com/buemura/agnt-cc/internal/provider"
+	"github.com/buemura/agnt-cc/internal/scanner"
 )
 
 func prompt(reader *bufio.Reader, label string) string {

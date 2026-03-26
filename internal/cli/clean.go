@@ -1,4 +1,4 @@
-package cmd
+package cli
 
 import (
 	"bufio"
@@ -6,9 +6,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/buemura/agnt-cc/provider"
-	"github.com/buemura/agnt-cc/scanner"
-	"github.com/buemura/agnt-cc/ui"
+	"github.com/buemura/agnt-cc/internal/provider"
+	"github.com/buemura/agnt-cc/internal/scanner"
+	"github.com/buemura/agnt-cc/internal/ui"
 	"github.com/spf13/cobra"
 )
 

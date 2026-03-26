@@ -1,9 +1,9 @@
-package cmd
+package cli
 
 import (
 	"os"
 
-	"github.com/buemura/agnt-cc/ui"
+	"github.com/buemura/agnt-cc/internal/ui"
 	"github.com/spf13/cobra"
 )
 

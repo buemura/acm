@@ -14,9 +14,11 @@ var rootCmd = &cobra.Command{
 	Short:   "Manage AI assistant cache files",
 	Long:    "A CLI tool to manage AI assistant cache files, starting with Claude and extensible to other providers.",
 	Version: version,
-	Run: func(cmd *cobra.Command, args []string) {
-		ui.RunMenu()
-	},
+	Run:     rootRun,
+}
+
+func rootRun(cmd *cobra.Command, args []string) {
+	ui.RunMenu()
 }
 
 func Execute() {

@@ -12,14 +12,20 @@ A CLI tool to manage and clean up cache files from AI coding assistants (Claude 
 
 ## Installation
 
+### Via `go install`
+
 **Prerequisites:** Go 1.24+
 
 ```bash
-# Clone and build
-make build
+go install github.com/buemura/acm@latest
+```
 
-# Or build directly
-go build -o acm .
+### From source
+
+```bash
+git clone https://github.com/buemura/acm.git
+cd acm
+make build
 ```
 
 ## Usage
@@ -76,9 +82,7 @@ acm clean -f                      # Skip confirmation prompt
 ## Project Structure
 
 ```
-├── cmd/
-│   └── acm/
-│       └── main.go              # Application entry point
+├── main.go                      # Application entry point
 ├── internal/
 │   ├── cli/                     # CLI commands (root, list, clean)
 │   ├── provider/                # Provider registry and implementations (Claude, Codex)

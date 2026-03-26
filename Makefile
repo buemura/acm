@@ -3,7 +3,7 @@ APP_NAME := acm
 .PHONY: build run clean help
 
 build:
-	go build -o $(APP_NAME) ./cmd/acm
+	go build -o $(APP_NAME) .
 
 run: build
 	./$(APP_NAME)

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/buemura/agnt-cc/internal/cli"
-	_ "github.com/buemura/agnt-cc/internal/provider"
+	"github.com/buemura/acm/internal/cli"
+	_ "github.com/buemura/acm/internal/provider"
 )
 
 func main() {

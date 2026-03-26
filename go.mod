@@ -1,4 +1,4 @@
-module github.com/buemura/agnt-cc
+module github.com/buemura/acm
 
 go 1.24.4
 

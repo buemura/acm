@@ -3,7 +3,7 @@ package cli
 import (
 	"os"
 
-	"github.com/buemura/agnt-cc/internal/ui"
+	"github.com/buemura/acm/internal/ui"
 	"github.com/spf13/cobra"
 )
 

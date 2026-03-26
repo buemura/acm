@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/buemura/agnt-cc/internal/scanner"
+	"github.com/buemura/acm/internal/scanner"
 )
 
 func FormatSize(bytes int64) string {

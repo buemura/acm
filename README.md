@@ -6,7 +6,6 @@ A CLI tool to manage and clean up cache files from AI coding assistants (Claude 
 
 - List and delete cache files with filtering by type and age
 - Multiple provider support (Claude, Codex) with extensible architecture
-- Interactive menu and direct CLI command modes
 - Human-readable file size and relative time formatting
 - Confirmation prompt before deletion (with `--force` override)
 
@@ -30,15 +29,13 @@ make build
 
 ## Usage
 
-### Interactive Mode
-
-Run without arguments to launch the interactive menu:
+Run without arguments to see available commands and flags:
 
 ```bash
-./acm
+acm
 ```
 
-### CLI Commands
+### Commands
 
 **List cache files:**
 
@@ -55,6 +52,12 @@ acm list -a 7d                    # Filter files older than 7 days
 acm clean                         # Delete Claude cache files (with confirmation)
 acm clean -p codex -a 30d         # Delete Codex files older than 30 days
 acm clean -f                      # Skip confirmation prompt
+```
+
+**Show supported providers:**
+
+```bash
+acm provider                      # List all available providers
 ```
 
 ### Flags
@@ -83,8 +86,9 @@ acm clean -f                      # Skip confirmation prompt
 
 ```
 ├── main.go                      # Application entry point
+├── cmd/
+│   └── cli/                     # CLI commands (root, list, clean, provider)
 ├── internal/
-│   ├── cli/                     # CLI commands (root, list, clean)
 │   ├── provider/                # Provider registry and implementations (Claude, Codex)
 │   ├── scanner/                 # File discovery, filtering, and deduplication
 │   └── ui/                      # Interactive menu and output formatting

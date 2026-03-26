@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var version = "0.1.1"
+var version = "0.1.2"
 
 var rootCmd = &cobra.Command{
 	Use:     "acm",
@@ -21,6 +21,7 @@ func rootRun(cmd *cobra.Command, args []string) {
 }
 
 func init() {
+	rootCmd.CompletionOptions.DisableDefaultCmd = true
 	rootCmd.PersistentFlags().StringP("provider", "p", "claude", "Cache provider name")
 	rootCmd.PersistentFlags().StringP("type", "t", "", "Filter by file extension (e.g. json, log)")
 	rootCmd.PersistentFlags().StringP("age", "a", "", "Filter by minimum file age (e.g. 20m, 24h, 7d)")

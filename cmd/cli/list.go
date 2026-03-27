@@ -18,23 +18,33 @@ var listCmd = &cobra.Command{
 		providerName, _ := cmd.Flags().GetString("provider")
 		fileType, _ := cmd.Flags().GetString("type")
 		age, _ := cmd.Flags().GetString("age")
+		verbose, _ := cmd.Flags().GetBool("verbose")
 
 		p, err := provider.Get(providerName)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 			os.Exit(1)
 		}
+
+		// Show verbose path information if requested
+		if verbose {
+			printVerbosePathInfo(p)
+			printVerboseCheckInfo(p)
+		}
+
 		if missing := provider.MissingPathChecks(p); len(missing) > 0 {
 			if len(missing) == len(p.Checks) {
 				fmt.Fprintf(os.Stderr, "No %s cache found. Is %s installed?\n", p.Name, p.Name)
 				return
 			}
-			fmt.Fprintf(
-				os.Stderr,
-				"Note: %s provider is missing expected %s in standard locations.\n",
-				p.Name,
-				strings.Join(missing, ", "),
-			)
+			if !verbose {
+				fmt.Fprintf(
+					os.Stderr,
+					"Note: %s provider is missing expected %s in standard locations.\n",
+					p.Name,
+					strings.Join(missing, ", "),
+				)
+			}
 		}
 
 		minAge, err := scanner.ParseAge(age)

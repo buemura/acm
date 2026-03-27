@@ -100,6 +100,12 @@ acm clean -v                      # Show verbose output before cleaning
 acm provider                      # List all available providers
 ```
 
+**Check installation health:**
+
+```bash
+acm doctor                        # Run diagnostics and check installation
+```
+
 ### Flags
 
 | Flag | Short | Description | Default |
@@ -185,6 +191,11 @@ Remove-Item acm.exe          # Remove built binary
 go test ./...                # Run tests
 ```
 
+## Documentation
+
+- **[Windows Installation Guide](docs/windows.md)** - Complete guide for Windows users
+- **[Troubleshooting Guide](docs/troubleshooting.md)** - Common issues and solutions
+
 ## Troubleshooting
 
 ### Windows: "acm is not recognized as an internal or external command"
@@ -223,13 +234,19 @@ For regular usage, Administrator rights are **not** required.
 
 If `acm list` returns no results:
 
-1. **Use verbose mode to see what paths are being checked**:
+1. **Run the health check**:
+   ```bash
+   acm doctor
+   ```
+   This checks your installation and diagnoses common issues.
+
+2. **Use verbose mode to see what paths are being checked**:
    ```bash
    acm list -v
    ```
    This shows which cache locations exist and which ones were not found.
 
-2. **Verify cache locations exist**:
+3. **Verify cache locations exist**:
    ```bash
    # Unix/macOS
    ls -la ~/.claude
@@ -240,9 +257,9 @@ If `acm list` returns no results:
    Get-ChildItem -Path $env:USERPROFILE\.codex -Force
    ```
 
-3. **Check if you've used the AI assistant** - cache files are only created after using Claude Code or Codex
+4. **Check if you've used the AI assistant** - cache files are only created after using Claude Code or Codex
 
-4. **Try a different provider**:
+5. **Try a different provider**:
    ```bash
    acm list -p codex
    acm list -p claude

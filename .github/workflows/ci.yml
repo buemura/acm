@@ -8,7 +8,10 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v4
@@ -18,7 +21,21 @@ jobs:
           go-version: "1.24"
 
       - name: Build
-        run: make build
+        run: go build -v .
 
       - name: Test
-        run: go test ./...
+        run: go test -v ./...
+
+      - name: Smoke Test (Unix)
+        if: runner.os != 'Windows'
+        run: |
+          ./acm provider
+          ./acm list --help
+          ./acm clean --help
+
+      - name: Smoke Test (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          .\acm.exe provider
+          .\acm.exe list --help
+          .\acm.exe clean --help

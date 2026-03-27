@@ -1,33 +1,36 @@
 package provider
 
 import (
-	"os"
 	"path/filepath"
 )
 
 func init() {
-	home, _ := os.UserHomeDir()
-	codexDir := filepath.Join(home, ".codex")
+	codexDir := buildAppDir("codex")
+
+	// Build cache paths (includes platform-specific locations)
+	cachePaths := getAllCachePaths("codex")
+
+	// Add non-cache paths
+	cachePaths = append(cachePaths,
+		filepath.Join(codexDir, "models_cache.json"),
+		filepath.Join(codexDir, "log"),
+		filepath.Join(codexDir, "logs_*.sqlite*"),
+		filepath.Join(codexDir, "sessions"),
+		filepath.Join(codexDir, "session_index.jsonl"),
+		filepath.Join(codexDir, "history.jsonl"),
+	)
+
+	// Build check patterns for cache directories
+	cacheCheckPatterns := getAllCachePaths("codex")
+	cacheCheckPatterns = append(cacheCheckPatterns, filepath.Join(codexDir, "models_cache.json"))
+
 	Register(&Provider{
-		Name: "codex",
-		CachePaths: []string{
-			filepath.Join(codexDir, "cache"),
-			filepath.Join(home, ".cache", "codex"),
-			filepath.Join(codexDir, "models_cache.json"),
-			filepath.Join(codexDir, "log"),
-			filepath.Join(codexDir, "logs_*.sqlite*"),
-			filepath.Join(codexDir, "sessions"),
-			filepath.Join(codexDir, "session_index.jsonl"),
-			filepath.Join(codexDir, "history.jsonl"),
-		},
+		Name:       "codex",
+		CachePaths: cachePaths,
 		Checks: []PathCheck{
 			{
-				Name: "cache files",
-				Patterns: []string{
-					filepath.Join(codexDir, "cache"),
-					filepath.Join(home, ".cache", "codex"),
-					filepath.Join(codexDir, "models_cache.json"),
-				},
+				Name:     "cache files",
+				Patterns: cacheCheckPatterns,
 			},
 			{
 				Name: "log files",

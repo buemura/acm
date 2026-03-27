@@ -25,6 +25,7 @@ func init() {
 	rootCmd.PersistentFlags().StringP("provider", "p", "claude", "Cache provider name")
 	rootCmd.PersistentFlags().StringP("type", "t", "", "Filter by file extension (e.g. json, log)")
 	rootCmd.PersistentFlags().StringP("age", "a", "", "Filter by minimum file age (e.g. 20m, 24h, 7d)")
+	rootCmd.PersistentFlags().BoolP("verbose", "v", false, "Show detailed path information")
 }
 
 func Execute() {

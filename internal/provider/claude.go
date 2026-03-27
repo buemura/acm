@@ -1,28 +1,31 @@
 package provider
 
 import (
-	"os"
 	"path/filepath"
 )
 
 func init() {
-	home, _ := os.UserHomeDir()
-	claudeDir := filepath.Join(home, ".claude")
+	claudeDir := buildAppDir("claude")
+
+	// Build cache paths (includes platform-specific locations)
+	cachePaths := getAllCachePaths("claude")
+
+	// Add non-cache paths
+	cachePaths = append(cachePaths,
+		filepath.Join(claudeDir, "projects"),
+		filepath.Join(claudeDir, "stats-cache.json"),
+	)
+
+	// Build check patterns for cache directories
+	cacheCheckPatterns := getAllCachePaths("claude")
+
 	Register(&Provider{
-		Name: "claude",
-		CachePaths: []string{
-			filepath.Join(claudeDir, "cache"),
-			filepath.Join(home, ".cache", "claude"),
-			filepath.Join(claudeDir, "projects"),
-			filepath.Join(claudeDir, "stats-cache.json"),
-		},
+		Name:       "claude",
+		CachePaths: cachePaths,
 		Checks: []PathCheck{
 			{
-				Name: "cache files",
-				Patterns: []string{
-					filepath.Join(claudeDir, "cache"),
-					filepath.Join(home, ".cache", "claude"),
-				},
+				Name:     "cache files",
+				Patterns: cacheCheckPatterns,
 			},
 			{
 				Name: "session transcripts",
